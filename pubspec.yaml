@@ -1,0 +1,35 @@
+name: triky_deck
+description: A new Flutter blog application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  auto_size_text: ^2.1.0
+  bot_toast: ^3.0.5
+  flutter_highlight: ^0.6.0
+  flutter_markdown: ^0.5.1
+  flutter_spinkit: ^4.1.2+1
+  get: ^3.17.1
+  google_fonts: ^1.1.1
+  google_sign_in: ^4.5.6
+  pdf: ^1.11.2
+  responsive_ui: ^2.0.1
+  url_launcher: ^5.7.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - res/
+    - res/1/
+  #   - images/a_dot_ham.jpeg
