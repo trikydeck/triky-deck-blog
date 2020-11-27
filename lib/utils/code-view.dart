@@ -83,31 +83,36 @@ class _SourceCodeViewState extends State<SourceCodeView> {
                   listBullet: GoogleFonts.lato(),
                 ),
                 imageBuilder: (uri, s, ss) => Center(
-                  child: CachedNetworkImage(
-                    imageUrl: uri.toString(),
-                    fit: BoxFit.contain,
-                    imageBuilder: (_, img) {
-                      return Card(
-                        elevation: 4,
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(_ImagePreviewer(preview: uri));
-                          },
-                          child: Hero(
-                            tag: 'preview',
-                            child: Image(image: img),
-                          ),
-                        ),
-                      );
-                    },
-                    placeholder: (_, s) => SpinKitPulse(
-                      itemBuilder: (c, i) {
-                        return CircleAvatar(
-                          backgroundImage: AssetImage(
-                            trikyImg,
+                  child: Div(
+                    colS: 11,
+                    colM: 8,
+                    colL: 6,
+                    child: CachedNetworkImage(
+                      imageUrl: uri.toString(),
+                      fit: BoxFit.contain,
+                      imageBuilder: (_, img) {
+                        return Card(
+                          elevation: 4,
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(_ImagePreviewer(preview: uri));
+                            },
+                            child: Hero(
+                              tag: 'preview',
+                              child: Image(image: img),
+                            ),
                           ),
                         );
                       },
+                      placeholder: (_, s) => SpinKitPulse(
+                        itemBuilder: (c, i) {
+                          return CircleAvatar(
+                            backgroundImage: AssetImage(
+                              trikyImg,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

@@ -14,7 +14,7 @@
 - Navigate to [Google Cloud Console](https://console.cloud.google.com) 
 - Create New project / Select an existing project
 
-![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/${widget.id}/img/1.webp)
+![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/1.webp)
 
 ## **Implementing in Flutter**
 
