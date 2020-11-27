@@ -43,13 +43,13 @@ class _DeckOneState extends State<DeckOne> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SourceCodeView(
-                url:
-                    "https://gist.githubusercontent.com/trikydeck/255449e7c6b7b610fccdcd143d9d4339/raw/9963999a29ef452fc41ad8009dc7e285351bcb57/deck-1.dart"),
+            SourceCodeView(id: 1),
+            Divider(),
             _user == null
                 ? Div(
                     colM: 4,
                     colL: 3,
+                    colS: 8,
                     child: RaisedButton(
                       padding: EdgeInsets.zero,
                       color: Get.theme.primaryColor,

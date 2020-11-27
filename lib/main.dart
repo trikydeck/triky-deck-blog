@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     final botToastBuilder = BotToastInit();
     return GetMaterialApp(
       title: 'TrikyDeck | Decks',
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       theme: theme.light,
       darkTheme: theme.dark,
       navigatorObservers: [BotToastNavigatorObserver()], //2.

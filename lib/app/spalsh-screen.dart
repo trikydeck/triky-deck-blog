@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: CircleAvatar(
                 minRadius: 30,
                 maxRadius: 100,
-                backgroundImage: NetworkImage(trikyImg),
+                backgroundImage: AssetImage(trikyImg),
               ),
             ),
           ),

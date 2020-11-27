@@ -1,15 +1,22 @@
-> ### Contents
+> ## Contents
 > - Requirements
-> - Creating `OAuth Client Id` in Google cloud console.
-> - Implementing in Flutter.
+> - Creating `OAuth Client Id` in Google cloud console
+> - Enabling Flutter web
+> - Implementing in Flutter
 
-### ***Reuirements***
-- [google_sign_in](https://pub.dev/packages/google_sign_in)
-- Google Account & [Cloud Console](https://console.cloud.google.com)
+## **Requirements**
+- Flutter - Beta channel
+- [google_sign_in](https://pub.dev/packages/google_sign_in) package
+- Google Account & [Cloud Console](https://console.cloud.google.com) to generate OAutho 2.0 client ID
+- Supported Browser [`chrome`,`Edge`]
 
-### ***Creating `OAuth Client Id` in Google cloud console***
+## **Creating `OAuth Client Id` in Google cloud console**
+- Navigate to [Google Cloud Console](https://console.cloud.google.com) 
+- Create New project / Select an existing project
 
-### ***Implementing in Flutter***
+![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/${widget.id}/img/1.webp)
+
+## **Implementing in Flutter**
 
 - Create GoogleSignIn :
 ````dart
@@ -49,7 +56,7 @@ GoogleSignInAccount _user;
   }
 
   void _signOut() async {
-    if (!await confirm('Signing out ?')) return;
+    print('Signing out ?');
     await googleSignIn.signOut();
     await googleSignIn.disconnect();
     setUser(null);
@@ -60,4 +67,3 @@ GoogleSignInAccount _user;
     return auth.idToken??'';
   }
 ````
-

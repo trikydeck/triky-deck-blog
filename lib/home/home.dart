@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(1.0),
               child: CircleAvatar(
                 maxRadius: 26,
-                backgroundImage: NetworkImage(trikyImg),
+                backgroundImage: AssetImage(trikyImg),
               ),
             ),
           ),
