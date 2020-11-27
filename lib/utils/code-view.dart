@@ -85,8 +85,8 @@ class _SourceCodeViewState extends State<SourceCodeView> {
                 imageBuilder: (uri, s, ss) => Center(
                   child: Div(
                     colS: 11,
-                    colM: 8,
-                    colL: 6,
+                    colM: 10,
+                    colL: 8,
                     child: CachedNetworkImage(
                       imageUrl: uri.toString(),
                       fit: BoxFit.contain,

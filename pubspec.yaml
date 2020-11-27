@@ -34,5 +34,4 @@ flutter:
   assets:
     - res/
     - res/1/
-    - lib/decks/1/readme.md
   #   - images/a_dot_ham.jpeg

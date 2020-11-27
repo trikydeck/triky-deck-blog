@@ -12,9 +12,15 @@
 
 ## **Creating `OAuth Client Id` in Google cloud console**
 - Navigate to [Google Cloud Console](https://console.cloud.google.com) 
-- Create New project / Select an existing project
-
-![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/1.webp)
+- Create New project / Select an existing project ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/1.webp)
+- To Create an OAuth client ID, you must first set a `product name` on the `contest screen`  ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/2.webp)  ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/3.webp)
+- [ *Application name field is enough for initial / demo purpose only. While filling other fields / uploading image you can proceed to verification* ]
+- Go to `Credentials` menu
+- Click `Create Credential` -> `OAuth Client ID` ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/4.webp)
+- Select `Application type` as `Web Application`
+- Add `Javascript origin` URIs [only `domain name`,(set port number if other than :80 )] and `create` ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/5.webp)
+- javascript origin uses Popup window sign-in method (no uri redirection required)
+- Copy the newly created `OAuth Client ID`  ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/6.webp)
 
 ## **Implementing in Flutter**
 
