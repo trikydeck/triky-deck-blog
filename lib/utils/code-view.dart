@@ -48,9 +48,9 @@ class _SourceCodeViewState extends State<SourceCodeView> {
                 },
                 styleSheet: MarkdownStyleSheet(
                   code: GoogleFonts.firaCode(
-                    fontSize: 16,
-                    color: Colors.pink[300],
-                  ),
+                      fontSize: 15,
+                      color: Colors.pink[300],
+                      backgroundColor: Colors.transparent),
                   codeblockAlign: WrapAlignment.center,
                   a: GoogleFonts.sourceSansPro(
                     fontSize: 16,
@@ -73,12 +73,12 @@ class _SourceCodeViewState extends State<SourceCodeView> {
                   ),
                   blockSpacing: 15,
                   blockquote: GoogleFonts.ubuntu(fontSize: 16),
-                  h1: GoogleFonts.cabin(letterSpacing: 1.5),
-                  h2: GoogleFonts.cabin(letterSpacing: 1.5),
-                  h3: GoogleFonts.cabin(letterSpacing: 1.5),
-                  h4: GoogleFonts.cabin(letterSpacing: 1.5),
-                  h5: GoogleFonts.cabin(letterSpacing: 1.5),
-                  h6: GoogleFonts.cabin(letterSpacing: 1.5),
+                  h1: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
+                  h2: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
+                  h3: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
+                  h4: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
+                  h5: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
+                  h6: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
                   p: GoogleFonts.sourceSansPro(fontSize: 16),
                   listBullet: GoogleFonts.lato(),
                 ),
@@ -98,7 +98,7 @@ class _SourceCodeViewState extends State<SourceCodeView> {
                               Get.to(_ImagePreviewer(preview: uri));
                             },
                             child: Hero(
-                              tag: 'preview',
+                              tag: uri,
                               child: Image(image: img),
                             ),
                           ),
@@ -147,36 +147,39 @@ class _ImagePreviewer extends StatelessWidget {
   const _ImagePreviewer({Key key, this.preview}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'preview',
-      child: Material(
-        child: Stack(
-          children: [
-            CachedNetworkImage(
-              imageUrl: preview.toString(),
-              fit: BoxFit.contain,
-              imageBuilder: (_, img) {
-                return PhotoView(
-                  imageProvider: img,
+    return Material(
+      child: Stack(
+        // alignment: Alignment.bottomCenter,
+        children: [
+          CachedNetworkImage(
+            imageUrl: preview.toString(),
+            fit: BoxFit.contain,
+            imageBuilder: (_, img) {
+              return PhotoView(
+                heroAttributes: PhotoViewHeroAttributes(tag: preview),
+                imageProvider: img,
+                enableRotation: false,
+              );
+            },
+            placeholder: (_, s) => SpinKitPulse(
+              itemBuilder: (c, i) {
+                return CircleAvatar(
+                  backgroundImage: AssetImage(
+                    trikyImg,
+                  ),
                 );
               },
-              placeholder: (_, s) => SpinKitPulse(
-                itemBuilder: (c, i) {
-                  return CircleAvatar(
-                    backgroundImage: AssetImage(
-                      trikyImg,
-                    ),
-                  );
-                },
-              ),
             ),
-            IconButton(
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: IconButton(
               icon: Icon(Icons.close),
               color: Colors.white,
               onPressed: Get.back,
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,8 +1,9 @@
 > ## Contents
 > - Requirements
 > - Creating `OAuth Client Id` in Google cloud console
-> - Enabling Flutter web
-> - Implementing in Flutter
+> - Configuring Flutter web
+> - Implementing GSign-in in Flutter
+> - Getting ID Token
 
 ## **Requirements**
 - Flutter - Beta channel
@@ -22,54 +23,122 @@
 - javascript origin uses Popup window sign-in method (no uri redirection required)
 - Copy the newly created `OAuth Client ID`  ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/6.webp)
 
-## **Implementing in Flutter**
+## **Configuring Flutter web**
+- Switch to `beta channel` to enable Flutter web [type the below command in terminal]
 
-- Create GoogleSignIn :
+> flutter channel beta
+> 
+> flutter upgrade
+> 
+> flutter config --enable-web
+
+- After switching to beta, creating new project will have `web` enabled.
+- To get support for existing project use the below command inside the project
+
+> flutter create .
+
+*. (note the `dot` at the end)*
+
+- Flutter web uses random port everytimr when start debugging, so a custom port number need to be set.
+- As I have mentioned my localhost port number  as :2000 , below command will be used
+> flutter run -d chrome --web-port 2000
+
+> flutter run -d edge --web-port 2000
+
+> flutter run -d web-server --web-port 2000
+
+- VSCode users can add the command in launch.json ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/7.webp)
+
+- For Android Studio add the command in run/debug configurations ![image info](https://i.stack.imgur.com/c1oLj.png)
+
+## **Implementing Google Sign-in in Flutter**
+- Add google_sign_in package in pubspec.yaml
+- Import in project 
+````dart
+import 'package:google_sign_in/google_sign_in.dart';
+````
+
+- Initialize GoogleSignIn with clientId copied from Google cloud console
 ````dart
 GoogleSignIn googleSignIn = GoogleSignIn(clientId: "<clientId>");
 
 GoogleSignInAccount _user;
 ````
-- Check | Sign-in | Set | Sign-out :
+
+- A common method to set user
 ````dart
-  void setUser(GoogleSignInAccount user) {
-    setState(() {
-      _user = user;
-    });
-    if (user == null) {
-      print('No sign-in');
-      return;
-    }
-    print('Welcome ${user.displayName}');
+void setUser(GoogleSignInAccount user) {
+  setState(() {
+    _user = user;
+  });
+  if (user == null) {
+    print('No sign-in');
+    return;
   }
+  print('Welcome ${user.displayName}');
+}
+````
 
-  void checkExistingSignIn() async {
-    bool isSignedIn = await googleSignIn.isSignedIn();
-    if (isSignedIn) {
-      // GoogleSignInAccount user = googleSignIn.currentUser; 
-      // will get current sign-in user 
-      // `but` to get IdToken a silent Signin requires ! 
-      GoogleSignInAccount user = await googleSignIn.signInSilently();
-      setUser(user);
-    }
-  }
+- Initiate signing and set user
+````dart
+void _startGoogleSignIn() async {
+  print('Signing out (if already signed-in)');
+  await googleSignIn.signOut(); //optional
+  GoogleSignInAccount user = await googleSignIn.signIn();
+  setUser(user);
+}
+````
 
-  void _startGoogleSignIn() async {
-    print('Signing out (if already signed-in)');
-    await googleSignIn.signOut(); //optional
-    GoogleSignInAccount user = await googleSignIn.signIn();
+- You can check for any existing user [try in initState]
+````dart
+void checkExistingSignIn() async {
+  bool isSignedIn = await googleSignIn.isSignedIn();
+  if (isSignedIn) {
+    // GoogleSignInAccount user = googleSignIn.currentUser; 
+    // will get current sign-in user 
+    // `but` to get IdToken a silent Signin requires ! 
+    GoogleSignInAccount user = await googleSignIn.signInSilently();
     setUser(user);
   }
+}
+````
 
-  void _signOut() async {
-    print('Signing out ?');
+- Sign out and disconnect the user
+````dart
+void _signOut() async {
+    print('Signing out');
     await googleSignIn.signOut();
     await googleSignIn.disconnect();
     setUser(null);
-  }
-
-  Future<String> _getIdToken() async {
-    GoogleSignInAuthentication auth = await _user.authentication;
-    return auth.idToken??'';
-  }
+}
 ````
+
+## **Getting ID Token**
+- ID Token can be fetch from authentication
+````dart
+Future<String> _getIdToken() async {
+  GoogleSignInAuthentication auth = await _user.authentication;
+  return auth.idToken??'';
+}
+````
+- No additional configurations need for web
+- But to get ID Token in Android some additional works to be done
+  - create a file in `android\app\src\main\res\values\strings.xml`
+  - Add the following lines
+  - Replace with your Web Application OAuth ClientID
+````xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com</string>
+</resources>
+````
+![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/9.webp)
+
+- Create a new Android OAuth Client ID in Cloud Console
+- Add Application package name
+- Add SHA-1 certificate fingerprint
+- Click on Create button to create Client ID ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/8.webp)
+  - Note : In String.xml you need to provide Web Application Client ID not the Android Client ID
+  - Note : We are not going to use this android Client ID in our project, but to get ID Token during sig-in, our app need to be verified by google cloud using package name & SHA-1
+
+
