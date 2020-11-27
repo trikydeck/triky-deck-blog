@@ -39,33 +39,33 @@
 
 *. (note the `dot` at the end)*
 
-- Flutter web uses random port everytimr when start debugging, so a custom port number need to be set.
-- As I have mentioned my localhost port number  as :2000 , below command will be used
+- Flutter web uses `random port` everytimr when start debugging, so a `custom port` number need to be set.
+- As I have mentioned my localhost port number as :2000, below command will be used to launch the web application in defined web port
 > flutter run -d chrome --web-port 2000
 
 > flutter run -d edge --web-port 2000
 
 > flutter run -d web-server --web-port 2000
 
-- VSCode users can add the command in launch.json ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/7.webp)
+- `VSCode` users can add the command in `launch.json` ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/7.webp)
 
-- For Android Studio add the command in run/debug configurations ![image info](https://i.stack.imgur.com/c1oLj.png)
+- For `Android Studio`, add the command in run/debug configurations ![image info](https://i.stack.imgur.com/c1oLj.png)
 
 ## **Implementing Google Sign-in in Flutter**
-- Add google_sign_in package in pubspec.yaml
+- Add `google_sign_in` package in pubspec.yaml
 - Import in project 
 ````dart
 import 'package:google_sign_in/google_sign_in.dart';
 ````
 
-- Initialize GoogleSignIn with clientId copied from Google cloud console
+- Initialize `GoogleSignIn` with `clientId` copied from Google cloud console
 ````dart
 GoogleSignIn googleSignIn = GoogleSignIn(clientId: "<clientId>");
 
 GoogleSignInAccount _user;
 ````
 
-- A common method to set user
+- A common method to set `_user`
 ````dart
 void setUser(GoogleSignInAccount user) {
   setState(() {
@@ -79,7 +79,7 @@ void setUser(GoogleSignInAccount user) {
 }
 ````
 
-- Initiate signing and set user
+- Initiate signing and set _user
 ````dart
 void _startGoogleSignIn() async {
   print('Signing out (if already signed-in)');
@@ -89,7 +89,7 @@ void _startGoogleSignIn() async {
 }
 ````
 
-- You can check for any existing user [try in initState]
+- You can check for any `existing user` [try in initState]
 ````dart
 void checkExistingSignIn() async {
   bool isSignedIn = await googleSignIn.isSignedIn();
@@ -122,10 +122,10 @@ Future<String> _getIdToken() async {
 }
 ````
 - No additional configurations need for web
-- But to get ID Token in Android some additional works to be done
+- `But` to get ID Token in Android some `additional works to be done`
   - create a file in `android\app\src\main\res\values\strings.xml`
   - Add the following lines
-  - Replace with your Web Application OAuth ClientID
+  - `Replace` with your Web Application OAuth ClientID
 ````xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -134,11 +134,21 @@ Future<String> _getIdToken() async {
 ````
 ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/9.webp)
 
-- Create a new Android OAuth Client ID in Cloud Console
-- Add Application package name
-- Add SHA-1 certificate fingerprint
+- Create a new `Android` OAuth Client ID in Cloud Console
+- Add Application `package name`
+- Add `SHA-1` certificate fingerprint
 - Click on Create button to create Client ID ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/8.webp)
-  - Note : In String.xml you need to provide Web Application Client ID not the Android Client ID
+  - Note : In String.xml you need to `provide Web Application Client ID not the Android Client ID`
   - Note : We are not going to use this android Client ID in our project, but to get ID Token during sig-in, our app need to be verified by google cloud using package name & SHA-1
+
+- Send the ID Token to the backend
+- `Decode` the ID Token using the below link
+  > https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={put the token here}
+- Parse the json and verify your Client-ID with `azp` and `aud`
+- Then get the `email` from json.
+
+- `That's all :-)`
+
+## **Test Google sign-in flutter in Realtime**
 
 
