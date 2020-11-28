@@ -5,24 +5,6 @@ class Decks {
   Decks() {
     _decks.add(DeckModel(
         title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
-    _decks.add(DeckModel(
-        title: 'Google Sign-in | without firebase', id: 1, view: DeckOne()));
   }
   final List<DeckModel> _decks = [];
 

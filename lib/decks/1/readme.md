@@ -138,12 +138,14 @@ Future<String> _getIdToken() async {
 - Add Application `package name`
 - Add `SHA-1` certificate fingerprint
 - Click on Create button to create Client ID ![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/8.webp)
-  - Note : In String.xml you need to `provide Web Application Client ID not the Android Client ID`
-  - Note : We are not going to use this android Client ID in our project, but to get ID Token during sig-in, our app need to be verified by google cloud using package name & SHA-1
+  - Note : In Strings.xml you need to `provide Web Application Client ID not the Android Client ID`
+  - Note : We are not going to use this android Client ID in our project, but to get ID Token during sign-in, our app need to be verified by google cloud using package name & SHA-1
 
 - Send the ID Token to the backend
 - `Decode` the ID Token using the below link
   > https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={put the token here}
+
+![image info](https://raw.githubusercontent.com/trikydeck/triky-deck-blog/master/lib/decks/1/img/10.webp)
 - Parse the json and verify your Client-ID with `azp` and `aud`
 - Then get the `email` from json.
 

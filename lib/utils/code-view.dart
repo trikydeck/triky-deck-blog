@@ -41,8 +41,8 @@ class _SourceCodeViewState extends State<SourceCodeView> {
                 backgroundColor: Get.theme.primaryColor,
               )
             : MarkdownBody(
+                fitContent: true,
                 data: md,
-                shrinkWrap: true,
                 onTapLink: (text, url, title) {
                   launch(url, webOnlyWindowName: '_blank');
                 },
@@ -51,35 +51,38 @@ class _SourceCodeViewState extends State<SourceCodeView> {
                       fontSize: 15,
                       color: Colors.pink[300],
                       backgroundColor: Colors.transparent),
-                  codeblockAlign: WrapAlignment.center,
                   a: GoogleFonts.sourceSansPro(
                     fontSize: 16,
                     decoration: TextDecoration.underline,
                     decorationColor: Colors.blue,
                   ),
-                  codeblockPadding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  codeblockPadding: EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 10,
+                  ),
                   codeblockDecoration: BoxDecoration(
                     color: Get.isDarkMode ? Colors.grey[800] : Colors.grey[200],
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  blockquotePadding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  blockquotePadding: EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 10,
+                  ),
                   blockquoteDecoration: BoxDecoration(
                     color: Get.isDarkMode
                         ? Colors.lightBlue[800]
                         : Colors.lightBlue[300],
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  blockSpacing: 15,
                   blockquote: GoogleFonts.ubuntu(fontSize: 16),
+                  blockSpacing: 15,
                   h1: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
                   h2: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
                   h3: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
                   h4: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
                   h5: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
                   h6: GoogleFonts.cabin(letterSpacing: 1.5, color: Colors.teal),
-                  p: GoogleFonts.sourceSansPro(fontSize: 16),
+                  p: GoogleFonts.openSans(fontSize: 17),
                   listBullet: GoogleFonts.lato(),
                 ),
                 imageBuilder: (uri, s, ss) => Center(

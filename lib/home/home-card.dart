@@ -68,6 +68,11 @@ class _HomeCardState extends State<HomeCard> {
                 hover = h;
               });
             },
+            onLongPress: () {
+              setState(() {
+                hover = !hover;
+              });
+            },
           ),
         ),
       ),
